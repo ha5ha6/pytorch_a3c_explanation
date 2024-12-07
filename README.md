@@ -59,7 +59,7 @@ python main.py --env-name 'Pong-v0' --num-processes 16
       )
 
 
-**inputs:** 3 channel image (1,42,42) from (210, 160, 3)
+**inputs:** (1,42,42) from 3 channel image (210, 160, 3)
 
 **outputs:** V, $\pi$ -logits, (hx,cx) (from LSTM)
 
@@ -72,6 +72,9 @@ python main.py --env-name 'Pong-v0' --num-processes 16
 local gradients are updated and copied to the shared model’s gradients every 20 steps or when episode ends
 
 ![](images/a3c_updating.png)
+
+
+### results
 
 
 ### video recording
@@ -87,7 +90,7 @@ env = gym.wrappers.RecordVideo(env, video_folder='videos', episode_trigger=episo
 def episode_trigger(episode_id):
     #return True  # Record every episode
     return episode_id % 100 == 0 # Record every 100 episode
-    #return episode_id in [5, 15] # Record at 5 and 15 episode
+    #return episode_id in [5, 15] # Record at episode 5 or 15
 ```
 
 ### env notes
@@ -97,5 +100,3 @@ state, info = env.reset()
 #five outputs
 state, reward, terminated, truncated, info = self.env.step(action)
 ```
-
-### results
