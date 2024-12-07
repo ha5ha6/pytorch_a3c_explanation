@@ -52,9 +52,7 @@ local gradients is updated and copied to shared model’s gradients every 20 ste
 
 **V_loss** - the critic loss is MSE loss
 
-$$
-L_{\text{critic}}(\theta_v) = \frac{1}{2} \mathbb{E}_{\pi_{\theta}} \left[ \sum_{t} \left( R_t - V_{\theta_v}(s_t) \right)^2 \right]
-$$
+$L_{\text{critic}}(\theta_v) = \frac{1}{2} \mathbb{E}_{\pi_{\theta}} \left[ \sum_{t} \left( R_t - V_{\theta_v}(s_t) \right)^2 \right]$
 
 $$
 L_{\text{critic}}(\theta_v) = \frac{1}{2} \mathbb{E}_{\pi_{\theta}} \left[ \sum_{t} \left( R_t - V_{\theta_v}(s_t) \right)^2 \right]
