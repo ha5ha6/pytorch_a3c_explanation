@@ -14,7 +14,7 @@ torch 1.13.1
 
 cv2 4.6.0
 
-#### Pong-v0
+#### Atari env
 
 **Pong-v0:** https://www.gymlibrary.dev/environments/atari/pong/
 
@@ -38,3 +38,14 @@ termination: either one reaches 21 scores
       (critic_linear): Linear(in_features=256, out_features=1, bias=True)
       (actor_linear): Linear(in_features=256, out_features=6, bias=True)
       )
+
+
+inputs: 3 channel image (1,42,42) from (210, 160, 3)
+
+outputs: V, $\pi$ -logits, (hx,cx) (from LSTM)
+
+initialization: Xavier (Glorot) Initialization + column normalization
+
+$$
+\int_{a}^{b} f(x) \, dx = F(b) - F(a)
+$$
