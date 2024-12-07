@@ -30,13 +30,16 @@ termination: either one reaches 21 scores
 
 python main.py --env-name 'Pong-v0' --num-processes 16
 
+note: mp.set_start_method('spawn') should be in the main script for running multiprocessing in macOS
+
     pytorch_a3c_explanation/
-    ├── main.py - execution
+    ├── main.py - execution for pytorch multiprocessing
     ├── test.py - performance monitoring worker
     ├── train.py - local training for each worker
-    ├── my_optim.py - Adam with shared memory
+    ├── my_optim.py - customized Adam with shared memory
     ├── envs.py - image inputs resizing and normalization
     ├── model.py - actor-critic pytorch network model
+
 
 ### network
 
@@ -62,10 +65,9 @@ initialization: Xavier (Glorot) Initialization + column normalization
 
 ![](images/a3c_diagram.jpg)
 
-local gradients is updated and copied to shared model’s gradients every 20 steps or when episode ends
+local gradients are updated and copied to shared model’s gradients every 20 steps or when episode ends
 
 ![](images/a3c_updating.png)
-
 
 
 ### video recording
@@ -77,6 +79,11 @@ pip install --upgrade gym ale-py imageio imageio-ffmpeg
 env = gym.make(env_id,render_mode='rgb_array')
 #in test.py
 env = gym.wrappers.RecordVideo(env, video_folder='videos', episode_trigger=episode_trigger)
+
+def episode_trigger(episode_id):
+    #return True  # Record every episode
+    return episode_id % 100 == 0 # Record every 100 episode
+    #return episode_id in [5, 15] # Record at 5 and 15 episode
 ```
 
 ### env notes
@@ -86,3 +93,5 @@ state, info = env.reset()
 #five outputs
 state, reward, terminated, truncated, info = self.env.step(action)
 ```
+
+### results
