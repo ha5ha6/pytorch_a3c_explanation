@@ -26,6 +26,18 @@ reward: win +1, lose -1
 
 termination: either one reaches 21 scores
 
+#### execution and code diagram
+
+python main.py --env-name 'Pong-v0' --num-processes 16
+
+    pytorch_a3c_explanation/
+    ├── main.py - execution
+    ├── test.py - performance monitoring worker
+    ├── train.py - local training for each worker
+    ├── my_optim.py - Adam with shared memory
+    ├── envs.py - image inputs resizing and normalization
+    ├── model.py - actor-critic pytorch network model
+
 #### network
 
 
