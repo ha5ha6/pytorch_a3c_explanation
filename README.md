@@ -60,11 +60,13 @@ initialization: Xavier (Glorot) Initialization + column normalization
 
 ### updating
 
+![](images/a3c_diagram.jpg)
+
 local gradients is updated and copied to shared model’s gradients every 20 steps or when episode ends
 
 ![](images/a3c_updating.png)
 
-![](images/a3c_diagram.jpg)
+
 
 ### video recording
 
