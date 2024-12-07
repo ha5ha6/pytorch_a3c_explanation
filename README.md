@@ -1,8 +1,8 @@
-#### reference
+### reference
 
 https://github.com/ikostrikov/pytorch-a3c
 
-#### environment
+### environment
 
 macOS M1
 
@@ -14,7 +14,7 @@ torch 1.13.1
 
 cv2 4.6.0
 
-#### Atari env
+### Atari env
 
 **Pong-v0:** https://www.gymlibrary.dev/environments/atari/pong/
 
@@ -26,7 +26,7 @@ reward: win +1, lose -1
 
 termination: either one reaches 21 scores
 
-#### execution and code diagram
+### execution and code diagram
 
 python main.py --env-name 'Pong-v0' --num-processes 16
 
@@ -38,7 +38,7 @@ python main.py --env-name 'Pong-v0' --num-processes 16
     ├── envs.py - image inputs resizing and normalization
     ├── model.py - actor-critic pytorch network model
 
-#### network
+### network
 
 
       ActorCritic(
@@ -58,8 +58,29 @@ outputs: V, $\pi$ -logits, (hx,cx) (from LSTM)
 
 initialization: Xavier (Glorot) Initialization + column normalization
 
-#### updating
+### updating
 
-local gradients is updated and copied to shared model’s gradients every 20 steps
+local gradients is updated and copied to shared model’s gradients every 20 steps or when episode ends
 
 ![](images/a3c_updating.png)
+
+![](images/a3c_diagram.jpg)
+
+### video recording
+
+pip install --upgrade gym ale-py imageio imageio-ffmpeg
+
+```python
+#in envs.py
+env = gym.make(env_id,render_mode='rgb_array')
+#in test.py
+env = gym.wrappers.RecordVideo(env, video_folder='videos', episode_trigger=episode_trigger)
+```
+
+### env notes
+
+```python
+state, info = env.reset()
+#five outputs
+state, reward, terminated, truncated, info = self.env.step(action)
+```
