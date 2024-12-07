@@ -46,6 +46,10 @@ outputs: V, $\pi$ -logits, (hx,cx) (from LSTM)
 
 initialization: Xavier (Glorot) Initialization + column normalization
 
-$$
-\int_{a}^{b} f(x) \, dx = F(b) - F(a)
-$$
+#### updating
+
+local gradients is updated and copied to shared model’s gradients every 20 steps
+
+**V_loss** - the critic loss is MSE loss
+
+$L_{\text{critic}}(\theta_v) = \frac{1}{2} \mathbb{E}_{\pi_{\theta}} \left[ \sum_{t} \left( R_t - V_{\theta_v}(s_t) \right)^2 \right]$
