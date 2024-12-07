@@ -4,11 +4,11 @@ https://github.com/ikostrikov/pytorch-a3c
 
 ### environment
 
-macOS M1
+macOS Apple M1 (8 cpu cores)
 
 python 3.7.16 (conda env)
 
-gym 0.26.2
+gym 0.26.2 (pip install "gym[atari, accept-rom-license]”)
 
 torch 1.13.1
 
@@ -26,11 +26,15 @@ reward: win +1, lose -1
 
 termination: either one reaches 21 scores
 
+**RL hyperparameters:**
+
+lr 0.0001, gm 0.99, lambda(for gae) 1.0, beta(for entropy) 0.01, V_loss coef 0.5
+
 ### execution and code diagram
 
 python main.py --env-name 'Pong-v0' --num-processes 16
 
-note: mp.set_start_method('spawn') should be in the main script for running multiprocessing in macOS
+**note:** mp.set_start_method('spawn') should be in the main script for running multiprocessing in macOS
 
     pytorch_a3c_explanation/
     ├── main.py - execution for pytorch multiprocessing
@@ -55,17 +59,17 @@ note: mp.set_start_method('spawn') should be in the main script for running mult
       )
 
 
-inputs: 3 channel image (1,42,42) from (210, 160, 3)
+**inputs:** 3 channel image (1,42,42) from (210, 160, 3)
 
-outputs: V, $\pi$ -logits, (hx,cx) (from LSTM)
+**outputs:** V, $\pi$ -logits, (hx,cx) (from LSTM)
 
-initialization: Xavier (Glorot) Initialization + column normalization
+**initialization:** Xavier (Glorot) Initialization + column normalization
 
 ### updating
 
 ![](images/a3c_diagram.jpg)
 
-local gradients are updated and copied to shared model’s gradients every 20 steps or when episode ends
+local gradients are updated and copied to the shared model’s gradients every 20 steps or when episode ends
 
 ![](images/a3c_updating.png)
 
