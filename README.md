@@ -76,6 +76,9 @@ local gradients are updated and copied to the shared model’s gradients every 2
 
 ### results
 
+results after 7-hour training (around 700+ episodes)
+
+![](images/a3c_results.png)
 
 ### video recording
 
